@@ -1,0 +1,367 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💧 Campanha: Cuide da Água!</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #c8f4ff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      background: url('https://cdn.pixabay.com/photo/2016/03/31/18/31/water-1298564_1280.png') no-repeat center;
+      background-size: cover;
+      color: #ffffff;
+      text-align: center;
+      padding: 80px 20px;
+      font-size: 28px;
+      text-shadow: 2px 2px #004d66;
+      position: relative;
+      z-index: 2;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #ffffffcc;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 {
+      color: #006699;
+      margin-bottom: 15px;
+    }
+
+    img.explica {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .quiz, .memory-game-section {
+      margin-top: 20px;
+      background-color: #e0f7fa;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #00bcd4;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #008ba3;
+    }
+
+    footer {
+      background-color: #0097a7;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer a {
+      color: #fff176;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    img.icone {
+      height: 40px;
+      vertical-align: middle;
+    }
+
+    /* Gotas de água animadas */
+    .gota {
+      position: absolute;
+      top: -50px;
+      width: 10px;
+      height: 20px;
+      background: rgba(0, 170, 255, 0.7);
+      border-radius: 50%;
+      animation: cair linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes cair {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Jogo da memória */
+    .memory-game {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      perspective: 1000px;
+    }
+
+    .memory-card {
+      width: 100%;
+      height: 100px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .memory-card.flip {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card.matched {
+      cursor: default;
+      box-shadow: 0 0 15px #00bcd4;
+    }
+
+    .front-face, .back-face {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      border: 2px solid #0097a7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .front-face {
+      background: #ffffff;
+      transform: rotateY(180deg);
+      color: #006699;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .back-face {
+      background: #00bcd4;
+      color: white;
+      font-size: 2em;
+    }
+
+    #end-message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #006699;
+      font-weight: bold;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .memory-game { grid-template-columns: repeat(3, 1fr); }
+      .front-face, .back-face { font-size: 1.2em; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    💦 <strong>Campanha: Cuide da Água!</strong> 💦<br>
+    <em>Aprendendo e se divertindo para proteger nosso bem mais precioso!</em>
+  </header>
+
+  <section>
+    <h2>🎥 Vídeo Explicativo</h2>
+    <p>Veja dicas práticas para economizar água no dia a dia e entender como pequenas atitudes fazem uma grande diferença.</p>
+    <p><strong>Acesse o vídeo:</strong> <a href="https://www.youtube.com/watch?v=yeXAJ3q8AFM" target="_blank">Clique aqui</a></p>
+  </section>
+
+  <section>
+    <h2>💡 Causas e Como Evitar o Desperdício</h2>
+
+    <h3>🚿 Banhos longos</h3>
+    <img class="explica" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoLv4r_f1SNEsppOA0bWyAogFRw7MbZfsnkw&s" alt="Banho longo">
+    <p><strong>Causa:</strong> Permanecer muito tempo no banho consome grandes quantidades de água.</p>
+    <p><strong>Como evitar:</strong> Tome banhos rápidos (até 5 minutos) e desligue o chuveiro ao se ensaboar.</p>
+
+    <h3>🚰 Torneira aberta</h3>
+    <img class="explica" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqve5OtgXl9L9gs98bhEV_SSf8oVtwT7X7A&s" alt="Torneira aberta">
+    <p><strong>Causa:</strong> Escovar os dentes ou lavar louça com a torneira aberta desperdiça litros de água.</p>
+    <p><strong>Como evitar:</strong> Feche a torneira quando não estiver usando a água diretamente.</p>
+
+    <h3>💧 Vazamentos</h3>
+    <img class="explica" src="https://static.vecteezy.com/ti/vetor-gratis/p1/15708605-desperdicio-de-agua-da-torneira-aberta-desperdicio-de-tema-de-agua-para-economizar-agua-espalhe-a-agua-no-chao-do-balde-do-buraco-vetor.jpg" width="230" height="230"="Vazamento">
+    <p><strong>Causa:</strong> Vazamentos pequenos podem causar perdas enormes ao longo do tempo.</p>
+    <p><strong>Como evitar:</strong> Faça revisões periódicas e conserte imediatamente qualquer vazamento.</p>
+  </section>
+
+  <section class="quiz">
+    <h2>❓ Quiz: Teste seus conhecimentos!</h2>
+    <div class="question">
+      <p>1. Qual é a melhor forma de lavar a calçada?</p>
+      <input type="radio" name="q1" value="errado"> Usar mangueira com água correndo<br>
+      <input type="radio" name="q1" value="correto"> Usar vassoura e balde com reaproveitamento de água<br>
+    </div>
+    <div class="question">
+      <p>2. O que devemos fazer ao escovar os dentes?</p>
+      <input type="radio" name="q2" value="correto"> Fechar a torneira enquanto escova<br>
+      <input type="radio" name="q2" value="errado"> Deixar a torneira aberta<br>
+    </div>
+    <div class="question">
+      <p>3. Qual o tempo ideal de banho para economizar água?</p>
+      <input type="radio" name="q3" value="errado"> 20 minutos<br>
+      <input type="radio" name="q3" value="correto"> 5 minutos<br>
+    </div>
+    <div class="question">
+      <p>4. O que fazer com vazamentos?</p>
+      <input type="radio" name="q4" value="correto"> Consertar imediatamente<br>
+      <input type="radio" name="q4" value="errado"> Deixar para depois<br>
+    </div>
+    <div class="question">
+      <p>5. Qual é uma forma inteligente de regar plantas?</p>
+      <input type="radio" name="q5" value="correto"> Reaproveitar água da chuva<br>
+      <input type="radio" name="q5" value="errado"> Usar mangueira no sol forte<br>
+    </div>
+    <button onclick="corrigirQuiz()">Verificar Respostas</button>
+    <p id="resultadoQuiz"></p>
+  </section>
+
+  <section class="memory-game-section">
+    <h2>🎮 Jogo da Memória</h2>
+    <p>Encontre os pares de atitudes que economizam água!</p>
+    <div class="memory-game" id="memory-game"></div>
+    <p id="end-message">Parabéns! Você encontrou todos os pares!</p>
+  </section>
+
+  <footer>
+    🌍 Cada gota conta! <br>
+    <img class="icone" src="https://cdn-icons-png.flaticon.com/512/2913/2913461.png" alt="gota de água"><br>
+    Desenvolvido por <strong>Franciele Gonçalves - 3º Ano 1</strong>
+  </footer>
+
+  <script>
+    // Gotas caindo
+    for (let i = 0; i < 40; i++) {
+      let gota = document.createElement('div');
+      gota.classList.add('gota');
+      gota.style.left = Math.random() * 100 + 'vw';
+      gota.style.animationDuration = (3 + Math.random() * 5) + 's';
+      gota.style.width = (5 + Math.random() * 10) + 'px';
+      gota.style.height = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(gota);
+    }
+
+    function corrigirQuiz() {
+      const respostasCorretas = document.querySelectorAll('input[value="correto"]:checked').length;
+      const total = 5;
+      document.getElementById("resultadoQuiz").innerText = `Você acertou ${respostasCorretas} de ${total} perguntas. Parabéns!`;
+    }
+  </script>
+
+  <script>
+    const cardData = [
+      'Banho curto',
+      'Fechar a torneira',
+      'Reaproveitar água',
+      'Consertar vazamentos',
+      'Regar com balde',
+      'Varrer calçada'
+    ];
+
+    const gameBoard = document.getElementById('memory-game');
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let matchedPairs = 0;
+
+    function shuffle(array) { array.sort(() => 0.5 - Math.random()); }
+
+    function createBoard() {
+      const cards = [...cardData, ...cardData];
+      shuffle(cards);
+      cards.forEach(cardText => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('memory-card');
+        cardElement.setAttribute('data-card', cardText);
+        cardElement.innerHTML = `
+          <div class="back-face">?</div>
+          <div class="front-face">${cardText}</div>
+        `;
+        cardElement.addEventListener('click', flipCard);
+        gameBoard.appendChild(cardElement);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard || this === firstCard) return;
+      this.classList.add('flip');
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      const isMatch = firstCard.dataset.card === secondCard.dataset.card;
+      isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      firstCard.classList.add('matched');
+      secondCard.classList.add('matched');
+      matchedPairs++;
+      if (matchedPairs === cardData.length) {
+        document.getElementById('end-message').style.display = 'block';
+      }
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+        resetBoard();
+      }, 1500);
+    }
+
+    function resetBoard() { [hasFlippedCard, lockBoard] = [false, false]; [firstCard, secondCard] = [null, null]; }
+
+    createBoard();
+  </script>
+
+</body>
+</html>
